@@ -15,6 +15,7 @@ module.exports = (_, args) => {
     devtool: 'source-map',
     context: src,
     devServer: {
+      allowedHosts: 'all',
       open: true,
       port,
       hot: true,
@@ -65,22 +66,30 @@ module.exports = (_, args) => {
           test: /\.svg/,
           type: 'asset/inline',
         },
+        
         {
-          test: /\.s[ac]ss$/i,
+          test: /\.(sass|css|scss)$/,
           use: [
-            {
-              loader: MiniCssExtractPlugin.loader,
-            },
-            {
-              loader: 'css-loader',
+            'style-loader',
+            'css-loader',
+            /*{
+              loader: "postcss-loader",
               options: {
-                modules: {
-                  localIdentName: '[name]_[local]-[hash:base64:5]',
-                },
+                plugins: () => [
+                  require("autoprefixer")()
+                ],
               },
-            },
+            },*/
             'sass-loader',
-          ],
+          ]
+        }
+        ,
+        {
+          test: /\.woff2$/i,
+          type: 'asset/resource',
+          generator: {
+            filename: 'fonts/[name][ext]',
+          },
         },
       ],
     },

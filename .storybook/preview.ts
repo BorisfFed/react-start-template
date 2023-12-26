@@ -1,4 +1,9 @@
 import type { Preview } from "@storybook/react";
+//import 'bootstrap/dist/css/bootstrap.min.css';
+//import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import "../src/js/bootstrap.bundle.min.js";
+import "../src/index.scss";
+
 
 const preview: Preview = {
   parameters: {
